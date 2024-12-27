@@ -1,52 +1,64 @@
-KubeSkope
+# KubeSkope 🚀
 
 KubeSkope is a graphical CLI tool designed to monitor Kubernetes resource usage. It provides insights into CPU and memory requests, limits, and actual usage for containers running in a specified namespace. This tool helps Kubernetes administrators identify over-dimensioned or under-dimensioned resources and optimize their workloads.
 
-Features
+---
 
-Namespace Monitoring: Analyze all pods and containers in a specified namespace.
+## Features ✨
 
-Resource Analysis: Display CPU and memory requests, limits, and live usage.
+- **Namespace Monitoring**: Analyze all pods and containers in a specified namespace.
+- **Resource Analysis**: Display CPU and memory requests, limits, and live usage.
+- **Graphical CLI Output**: Outputs data in a table format with clear visualization.
+- **Customizable Kubeconfig**: Allows specifying a custom kubeconfig path.
 
-Graphical CLI Output: Outputs data in a table format with clear visualization.
+---
 
-Customizable Kubeconfig: Allows specifying a custom kubeconfig path.
+## Prerequisites 📋
 
-Prerequisites
+- **Kubernetes Cluster**: A running Kubernetes cluster (e.g., Kind, Minikube, or a production cluster).
+- **Metrics Server**: Ensure the Kubernetes Metrics Server is installed and running.
+- **Go**: Installed Go environment (1.20 or later).
 
-Kubernetes Cluster: A running Kubernetes cluster (e.g., Kind, Minikube, or a production cluster).
+---
 
-Metrics Server: Ensure the Kubernetes Metrics Server is installed and running.
+## Installation ⚙️
 
-Go: Installed Go environment (1.20 or later).
+1. **Clone the Repository**:
 
-Installation
+   ```bash
+   git clone https://github.com/<your-username>/kubeskope.git
+   cd kubeskope
+   ```
 
-Clone the Repository:
+2. **Build the Application**:
 
-git clone https://github.com/<your-username>/kubeskope.git
-cd kubeskope
+   ```bash
+   go build -o kubeskope
+   ```
 
-Build the Application:
+3. **Run the Application**:
 
-go build -o kubeskope
+   ```bash
+   ./kubeskope monitor --namespace <namespace> --kubeconfig <path-to-kubeconfig>
+   ```
 
-Run the Application:
+---
 
-./kubeskope monitor --namespace <namespace> --kubeconfig <path-to-kubeconfig>
+## Usage 🖥️
 
-Usage
-
-Monitor a Namespace
+### Monitor a Namespace
 
 Run the following command to monitor resource usage in a specific namespace:
 
+```bash
 ./kubeskope monitor --namespace test-namespace --kubeconfig ~/.kube/config
+```
 
-Example Output
+### Example Output
 
+```plaintext
 +---------------------------------+-----------+--------------+-----------------+------------+---------------+----------------------------+
-|               POD               | CONTAINER | CPU REQUESTS | MEMORY REQUESTS | CPU LIMITS | MEMORY LIMITS |           USAGE            |
+| Pod                             | Container | CPU Requests | Memory Requests | CPU Limits | Memory Limits |           Usage            |
 +---------------------------------+-----------+--------------+-----------------+------------+---------------+----------------------------+
 | nginx-deployment-8b7fcb74-7qsnb | nginx     | 100m         | 128Mi           | 200m       | 256Mi         | CPU: 50m, Memory: 64Mi     |
 +---------------------------------+-----------+--------------+-----------------+------------+---------------+----------------------------+
@@ -54,73 +66,87 @@ Example Output
 +---------------------------------+-----------+--------------+-----------------+------------+---------------+----------------------------+
 | nginx-deployment-8b7fcb74-vsvdp | nginx     | 100m         | 128Mi           | 200m       | 256Mi         | CPU: 40m, Memory: 50Mi     |
 +---------------------------------+-----------+--------------+-----------------+------------+---------------+----------------------------+
+```
 
-Flags and Options
+---
 
---namespace
+## Flags and Options 🛠️
 
-Description: Specify the namespace to monitor.
+### `--namespace`
 
-Example:
+- **Description**: Specify the namespace to monitor.
+- **Example**:
+  ```bash
+  ./kubeskope monitor --namespace test-namespace
+  ```
 
-./kubeskope monitor --namespace test-namespace
+### `--kubeconfig`
 
---kubeconfig
+- **Description**: Path to the kubeconfig file.
+- **Example**:
+  ```bash
+  ./kubeskope monitor --kubeconfig ~/.kube/config
+  ```
 
-Description: Path to the kubeconfig file.
+---
 
-Example:
+## Development 🛠️
 
-./kubeskope monitor --kubeconfig ~/.kube/config
+### Run the Application Locally
 
-Development
+1. Ensure you have Go installed.
+2. Run the application:
+   ```bash
+   go run main.go monitor --namespace <namespace> --kubeconfig <path-to-kubeconfig>
+   ```
 
-Run the Application Locally
-
-Ensure you have Go installed.
-
-Run the application:
-
-go run main.go monitor --namespace <namespace> --kubeconfig <path-to-kubeconfig>
-
-Run Tests
+### Run Tests
 
 Use the built-in Go testing framework to run unit tests:
 
+```bash
 go test ./...
+```
 
-Contributing
+---
+
+## Contributing 🤝
 
 Contributions are welcome! To contribute:
 
-Fork the repository.
+1. Fork the repository.
+2. Create a feature branch.
+3. Commit your changes.
+4. Open a pull request.
 
-Create a feature branch.
+---
 
-Commit your changes.
+## License 📜
 
-Open a pull request.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-License
+---
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+## Troubleshooting 🐛
 
-Troubleshooting
+### Common Issues
 
-Common Issues
+- **Metrics Not Available**: Ensure the Metrics Server is installed and running in your cluster.
+  ```bash
+  kubectl get apiservices | grep metrics
+  ```
+- **Connection Errors**: Verify the kubeconfig path and cluster access.
+  ```bash
+  kubectl get nodes --kubeconfig <path-to-kubeconfig>
+  ```
 
-Metrics Not Available: Ensure the Metrics Server is installed and running in your cluster.
-
-kubectl get apiservices | grep metrics
-
-Connection Errors: Verify the kubeconfig path and cluster access.
-
-kubectl get nodes --kubeconfig <path-to-kubeconfig>
-
-Logs
+### Logs
 
 Enable verbose logging by adding debug statements in the code.
 
-Contact
+---
+
+## Contact 📬
 
 For support or inquiries, please create an issue in the repository or contact the maintainers.
+
