@@ -1,5 +1,7 @@
 # KubeSkope 🚀
 
+![KubeSkope Logo](assets/logo.png)
+
 KubeSkope is a graphical CLI tool designed to monitor Kubernetes resource usage. It provides insights into CPU and memory requests, limits, and actual usage for containers running in a specified namespace. This tool helps Kubernetes administrators identify over-dimensioned or under-dimensioned resources and optimize their workloads.
 
 ---
